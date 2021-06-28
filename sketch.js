@@ -1,6 +1,7 @@
 var centerX = null
 var centerY = null
 var radius = 10
+var image;
 
 var turn = 0.4;
 var incrValue = 0;
@@ -16,6 +17,10 @@ var incrInput = null;
 var submitButton = null;
 var inputting = false;
 
+// function preLoad(){
+// 	image = loadImage('flower1.jpg');
+// }
+
 function setup() {
 	backgroundColor = color(0);
 	fill(255);
@@ -25,8 +30,8 @@ function setup() {
 	actualHeight = windowHeight;
 	canvas = createCanvas(actualWidth, actualHeight);
 	background(backgroundColor)
-	centerX = actualWidth/2
-	centerY = actualHeight/2
+	centerX = actualWidth / 2
+	centerY = actualHeight / 2
 
 	hideButton = createButton('Toggle Controls')
 	hideButton.position(0, 0)
@@ -45,19 +50,19 @@ function setup() {
 	submitButton.mousePressed(updateParameters)
 }
 
-function updateParameters(){
+function updateParameters() {
 	turn = Number(turnInput.value())
 	incrValue = Number(incrInput.value())
 	inputting = false;
 }
 
-function setInputtingToTrue(){
+function setInputtingToTrue() {
 	inputting = true;
 	console.log("inputting...")
 }
 
-function toggleHide(){
-	if(hidden){
+function toggleHide() {
+	if (hidden) {
 		turnInput.show()
 		incrInput.show()
 		submitButton.show()
@@ -65,7 +70,7 @@ function toggleHide(){
 		// centerX = canvas.width/2
 		// background(backgroundColor)
 		hidden = false;
-	}else{
+	} else {
 		turnInput.hide()
 		incrInput.hide()
 		submitButton.hide()
@@ -76,33 +81,33 @@ function toggleHide(){
 	}
 }
 
-function drawSpiral(t){
+function drawSpiral(t) {
 	background(backgroundColor)
 	r = radius
-	curX = 	centerX
+	curX = centerX
 	curY = centerY
-	radius_increment = 1/t
+	radius_increment = 1 / t
 	ang = 0
-	while(r<=windowWidth/1.5){
+	while (r <= windowWidth / 1.5) {
 		ellipse(curX, curY, 5, 5)
-		ang += 2*Math.PI*t
-		curX = centerX + r*Math.sin(ang)
-		curY = centerY + r*Math.cos(ang)
+		ang += 2 * Math.PI * t
+		curX = centerX + r * Math.sin(ang)
+		curY = centerY + r * Math.cos(ang)
 		r += radius_increment
 	}
 }
 
-function drawText(){
+function drawText() {
 	text("Turn Value: ", 10, turnInput.y - 10)
 	text("Increment by: ", 10, incrInput.y - 10)
 	console.log("Drawing text.")
 }
 
-function draw(){
-	if(!hidden){
+function draw() {
+	if (!hidden) {
 		drawText()
 	}
-	if(!inputting){
+	if (!inputting) {
 		turnInput.value(turn)
 		incrInput.value(incrValue)
 	}
